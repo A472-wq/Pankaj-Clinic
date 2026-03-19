@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pankaj Clinic – Homeopathy Center, Kanpur</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --green:#1e4d35;
+  --green-mid:#2d6a4f;
+  --green-light:#52b788;
+  --green-bg:#f0f4f1;
+  --cream:#f5f0e8;
+  --olive:#8b7d5a;
+  --dark:#1a2e1f;
+  --gray:#6b7280;
+  --border:#e5e7eb;
+  --white:#fff;
+  --shadow:0 4px 24px rgba(30,77,53,.10);
+  --shadow-lg:0 12px 40px rgba(30,77,53,.15);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden;}
+
+/* ── UTILITY ── */
+.page{display:none;}
+.page.active{display:block;}
+.container{max-width:1200px;margin:0 auto;padding:0 5%;}
+.gradient-text{background:linear-gradient(135deg,var(--green) 0%,var(--green-light) 60%,var(--olive) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.olive-text{background:linear-gradient(135deg,var(--olive) 0%,#b8984a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);font-weight:500;margin-bottom:.8rem;}
+.reveal{opacity:0;transform:translateY(24px);transition:all .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  height:68px;display:flex;align-items:center;
+  transition:box-shadow .3s;
+}
+.nav-inner{width:100%;max-width:1300px;margin:0 auto;padding:0 5%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:.75rem;cursor:pointer;text-decoration:none;}
+.nav-logo-icon{width:42px;height:42px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nav-logo-icon svg{width:22px;height:22px;}
+.nav-logo-text strong{font-size:1rem;font-weight:600;color:var(--dark);display:block;}
+.nav-logo-text span{font-size:.72rem;color:var(--gray);}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nav-links a{text-decoration:none;font-size:.88rem;color:var(--gray);font-weight:500;transition:color .2s;cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;}
+.nav-links a:hover,.nav-links a.active{color:var(--green);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-phone{display:flex;align-items:center;gap:.4rem;color:var(--gray);font-size:.85rem;text-decoration:none;transition:color .2s;}
+.nav-phone:hover{color:var(--green);}
+.nav-phone svg{width:16px;height:16px;}
+.btn-nav{background:var(--green);color:#fff;padding:.6rem 1.4rem;border-radius:50px;font-size:.85rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif;}
+.btn-nav:hover{background:var(--green-mid);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.3rem;}
+.hamburger span{width:22px;height:2px;background:var(--dark);display:block;border-radius:2px;transition:all .3s;}
+
+/* mobile nav */
+.mobile-nav{display:none;position:fixed;top:68px;left:0;width:100%;background:var(--white);border-bottom:1px solid var(--border);z-index:199;padding:1.5rem 5%;flex-direction:column;gap:1.2rem;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-size:1rem;color:var(--dark);text-decoration:none;font-weight:500;cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;text-align:left;}
+.mobile-nav a:hover{color:var(--green);}
+
+/* ── BUTTONS ── */
+.btn-primary{background:var(--green);color:#fff;padding:.85rem 1.8rem;border-radius:50px;font-size:.9rem;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;border:none;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;}
+.btn-primary:hover{background:var(--green-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,77,53,.25);}
+.btn-primary svg{width:16px;height:16px;}
+.btn-outline{background:transparent;color:var(--dark);padding:.85rem 1.8rem;border-radius:50px;font-size:.9rem;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;border:1.5px solid var(--border);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;}
+.btn-outline:hover{border-color:var(--green);color:var(--green);}
+.btn-outline svg{width:16px;height:16px;}
+.btn-white{background:#fff;color:var(--green);padding:.85rem 2rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;border:none;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;}
+.btn-white:hover{background:var(--cream);transform:translateY(-2px);}
+.btn-white svg{width:16px;height:16px;}
+.btn-outline-white{background:transparent;color:#fff;padding:.85rem 2rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;border:2px solid rgba(255,255,255,.5);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;}
+.btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,.1);}
+
+/* ══════════════════════════
+   HOME PAGE
+══════════════════════════ */
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:var(--green-bg);
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:100px 8% 60px;gap:3rem;
+  position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(82,183,136,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(30,77,53,.08);border:1px solid rgba(30,77,53,.2);border-radius:50px;padding:.35rem 1rem;font-size:.75rem;font-weight:500;color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.8rem;animation:fadeUp .7s ease both;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,4.5vw,4rem);line-height:1.08;font-weight:700;color:var(--dark);margin-bottom:1.5rem;animation:fadeUp .7s .1s ease both;}
+.hero-desc{font-size:1rem;color:var(--gray);line-height:1.78;max-width:440px;margin-bottom:2.2rem;animation:fadeUp .7s .2s ease both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;animation:fadeUp .7s .3s ease both;}
+.hero-meta{display:flex;gap:2.5rem;flex-wrap:wrap;animation:fadeUp .7s .4s ease both;}
+.hero-meta-item{display:flex;align-items:center;gap:.6rem;}
+.hero-meta-item svg{width:18px;height:18px;color:var(--green);flex-shrink:0;}
+.hero-meta-item strong{display:block;font-size:.85rem;color:var(--dark);font-weight:500;}
+.hero-meta-item span{font-size:.75rem;color:var(--gray);}
+
+/* Hero image — exact match: woman in green dress */
+.hero-img-wrap{animation:fadeIn 1s .3s ease both;}
+.hero-img{
+  width:100%;height:520px;border-radius:20px;overflow:hidden;position:relative;
+  background:linear-gradient(160deg,#c8e6c9 0%,#a5d6a7 40%,#6dbb7a 100%);
+}
+.hero-img-photo{
+  width:100%;height:100%;position:relative;
+  background:linear-gradient(180deg,#d4edd8 0%,#a8d5b0 35%,#5a9e6a 80%,#2e6b3e 100%);
+  display:flex;align-items:flex-end;justify-content:center;overflow:hidden;
+}
+/* Nature background blobs */
+.hero-img-photo::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse 80% 60% at 80% 20%,rgba(180,230,150,.4) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 80% at 20% 80%,rgba(80,140,80,.3) 0%,transparent 60%);
+}
+.hero-figure{position:relative;z-index:2;width:280px;margin-bottom:0;}
+.hero-figure svg{width:100%;height:auto;}
+.hero-badge-float{
+  position:absolute;bottom:28px;left:24px;z-index:5;
+  background:#fff;border-radius:14px;padding:.9rem 1.3rem;
+  display:flex;align-items:center;gap:.7rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.12);
+}
+.hero-badge-float-icon{width:38px;height:38px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hero-badge-float-icon svg{width:18px;height:18px;}
+.hero-badge-float strong{display:block;font-size:.88rem;color:var(--dark);}
+.hero-badge-float span{font-size:.72rem;color:var(--gray);}
+.hero-badge-float2{
+  position:absolute;top:40px;right:24px;z-index:5;
+  background:#fff;border-radius:14px;padding:.8rem 1.1rem;
+  display:flex;align-items:center;gap:.6rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.12);
+}
+.hero-badge-float2 svg{width:20px;height:20px;color:var(--green);}
+.hero-badge-float2 strong{font-size:.82rem;color:var(--dark);}
+.hero-badge-float2 span{font-size:.7rem;color:var(--gray);display:block;}
+
+/* STATS BAR */
+.stats-bar{background:var(--green);padding:3rem 8%;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.stat-item{text-align:center;}
+.stat-icon{width:48px;height:48px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;}
+.stat-icon svg{width:22px;height:22px;color:#fff;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.3rem;}
+.stat-label{font-size:.82rem;color:rgba(255,255,255,.75);}
+
+/* SERVICES SECTION */
+.services-section{padding:6rem 8%;background:var(--white);}
+.section-header{text-align:center;margin-bottom:3.5rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:.8rem;}
+.section-desc{color:var(--gray);font-size:.95rem;max-width:520px;margin:0 auto;line-height:1.75;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2.5rem;}
+.service-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all .3s;cursor:pointer;}
+.service-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.service-card.featured{border:2px solid var(--green);background:#f9fdfb;}
+.svc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
+.svc-icon svg{width:26px;height:26px;color:#fff;}
+.icon-pink{background:linear-gradient(135deg,#ec4899,#f472b6);}
+.icon-purple{background:linear-gradient(135deg,#8b5cf6,#a78bfa);}
+.icon-blue{background:linear-gradient(135deg,#3b82f6,#60a5fa);}
+.icon-orange{background:linear-gradient(135deg,#f97316,#fb923c);}
+.icon-indigo{background:linear-gradient(135deg,#6366f1,#818cf8);}
+.icon-teal{background:linear-gradient(135deg,#14b8a6,#2dd4bf);}
+.svc-name{font-family:'Playfair Display',serif;font-size:1.18rem;font-weight:600;color:var(--dark);margin-bottom:.5rem;}
+.svc-desc{font-size:.82rem;color:var(--gray);line-height:1.65;}
+.view-all-center{text-align:center;}
+
+/* TESTIMONIALS */
+.testimonials-section{padding:6rem 8%;background:var(--green-bg);}
+.reviews-wrap{position:relative;margin-top:3rem;overflow:hidden;}
+.reviews-track{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.reviews-track::-webkit-scrollbar{display:none;}
+.review-card{
+  background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--border);
+  flex:0 0 calc(33.333% - 1rem);min-width:280px;scroll-snap-align:start;
+  height:230px;display:flex;flex-direction:column;justify-content:space-between;
+  transition:all .3s;
+}
+.review-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.stars{display:flex;gap:2px;margin-bottom:.8rem;}
+.stars svg{width:18px;height:18px;fill:#f59e0b;}
+.review-text{font-size:.87rem;color:var(--gray);line-height:1.72;font-style:italic;flex:1;}
+.reviewer-name{font-size:.9rem;font-weight:600;color:var(--dark);margin-top:1rem;}
+.reviewer-type{font-size:.75rem;color:var(--gray);margin-top:.15rem;}
+.carousel-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.8rem;}
+.carousel-btn{width:40px;height:40px;border:1.5px solid var(--border);border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;}
+.carousel-btn:hover{border-color:var(--green);background:var(--green);}
+.carousel-btn:hover svg{color:#fff;}
+.carousel-btn svg{width:16px;height:16px;color:var(--dark);}
+.dots{display:flex;gap:.5rem;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:all .3s;}
+.dot.active{background:var(--green);width:24px;border-radius:4px;}
+
+/* CTA SECTION */
+.cta-section{background:var(--green-mid);padding:5rem 8%;text-align:center;}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:#fff;margin-bottom:1rem;line-height:1.2;}
+.cta-desc{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:2.5rem;line-height:1.75;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--green);padding:4rem 8% 2rem;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-brand strong{font-size:1.1rem;color:#fff;display:block;margin-bottom:.4rem;}
+.footer-brand p{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:1.2rem;}
+.footer-socials{display:flex;gap:.8rem;}
+.footer-socials a{width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s;}
+.footer-socials a:hover{border-color:#fff;color:#fff;}
+.footer-socials svg{width:15px;height:15px;}
+.footer-col h4{font-size:.88rem;font-weight:600;color:#fff;margin-bottom:1.2rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:.7rem;}
+.footer-col ul li a{font-size:.82rem;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;}
+.footer-col ul li a:hover{color:#fff;}
+.footer-contact-item{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.8rem;}
+.footer-contact-item svg{width:15px;height:15px;flex-shrink:0;margin-top:2px;color:var(--green-light);}
+.footer-contact-item span{font-size:.82rem;color:rgba(255,255,255,.6);}
+.footer-bottom{padding-top:1.5rem;text-align:center;font-size:.78rem;color:rgba(255,255,255,.4);}
+
+/* ══════════════════════════
+   SERVICES PAGE
+══════════════════════════ */
+.page-hero{padding:120px 8% 4rem;background:var(--green-bg);text-align:center;}
+.page-hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:1rem;}
+.page-hero-desc{color:var(--gray);font-size:1rem;max-width:560px;margin:0 auto;line-height:1.78;}
+.services-full-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:4rem 8%;}
+.svc-full-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all .3s;}
+.svc-full-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.svc-full-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--dark);margin:1rem 0 .5rem;}
+.svc-full-desc{font-size:.84rem;color:var(--gray);line-height:1.7;}
+.svc-features{margin-top:1rem;display:flex;flex-direction:column;gap:.4rem;}
+.svc-feature{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--gray);}
+.svc-feature svg{width:14px;height:14px;color:var(--green);flex-shrink:0;}
+
+/* ══════════════════════════
+   ABOUT PAGE
+══════════════════════════ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:5rem 8%;}
+.about-img{width:100%;height:480px;background:linear-gradient(160deg,#c8e6c9 0%,#81c784 100%);border-radius:20px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.about-img::after{content:'Dr. Pankaj Clinic';position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.9);padding:.6rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--green);white-space:nowrap;}
+.about-img svg{width:120px;height:120px;color:rgba(30,77,53,.25);}
+.about-content .section-eyebrow{text-align:left;}
+.about-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.2;margin-bottom:1.5rem;}
+.about-desc{font-size:.92rem;color:var(--gray);line-height:1.82;margin-bottom:1.2rem;}
+.qual-list{margin-top:2rem;display:flex;flex-direction:column;gap:1rem;}
+.qual-item{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem;background:var(--green-bg);border-radius:12px;}
+.qual-icon{width:36px;height:36px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.qual-icon svg{width:18px;height:18px;color:#fff;}
+.qual-content strong{font-size:.88rem;color:var(--dark);font-weight:600;display:block;margin-bottom:.15rem;}
+.qual-content span{font-size:.78rem;color:var(--gray);}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:3rem 8%;background:var(--green-bg);}
+.about-stat{text-align:center;padding:2rem;background:#fff;border-radius:16px;}
+.about-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;margin-bottom:.4rem;}
+.about-stat-label{font-size:.8rem;color:var(--gray);}
+
+/* ══════════════════════════
+   GALLERY PAGE
+══════════════════════════ */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:4rem 8%;}
+.gallery-item{border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,#c8e6c9,#81c784);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .3s;}
+.gallery-item:hover{transform:scale(1.02);}
+.gallery-item:nth-child(2){background:linear-gradient(135deg,#b2dfdb,#4db6ac);}
+.gallery-item:nth-child(3){background:linear-gradient(135deg,#c5cae9,#7986cb);}
+.gallery-item:nth-child(4){background:linear-gradient(135deg,#f8bbd0,#f06292);}
+.gallery-item:nth-child(5){background:linear-gradient(135deg,#fff9c4,#ffd54f);}
+.gallery-item:nth-child(6){background:linear-gradient(135deg,#d7ccc8,#a1887f);}
+.gallery-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);color:#fff;padding:1rem;font-size:.85rem;font-weight:500;}
+.gallery-item svg{width:60px;height:60px;color:rgba(255,255,255,.4);}
+
+/* ══════════════════════════
+   CONTACT PAGE
+══════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:4rem 8%;}
+.contact-card{display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;background:var(--green-bg);border-radius:12px;margin-bottom:1rem;}
+.contact-card-icon{width:44px;height:44px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.contact-card-icon svg{width:20px;height:20px;color:#fff;}
+.contact-card-label{font-size:.72rem;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem;}
+.contact-card-value{font-size:.92rem;color:var(--dark);line-height:1.5;}
+.contact-card-value a{color:var(--green);text-decoration:none;}
+.map-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#c8e6c9,#81c784);border-radius:12px;margin-top:1.5rem;display:flex;align-items:center;justify-content:center;font-size:.88rem;color:var(--green);font-weight:500;gap:.5rem;}
+.form-card{background:var(--green-bg);border-radius:20px;padding:2.5rem;}
+.form-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--dark);margin-bottom:.4rem;}
+.form-subtitle{font-size:.84rem;color:var(--gray);margin-bottom:2rem;line-height:1.6;}
+.form-group{margin-bottom:1.2rem;}
+.form-label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:.4rem;font-weight:500;}
+.form-input{width:100%;padding:.78rem 1rem;border:1.5px solid var(--border);border-radius:10px;background:#fff;font-family:'Inter',sans-serif;font-size:.88rem;color:var(--dark);transition:border-color .25s;outline:none;}
+.form-input:focus{border-color:var(--green);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-submit{width:100%;margin-top:1.5rem;background:var(--green);color:#fff;border:none;padding:1rem;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;border-radius:50px;transition:all .3s;}
+.form-submit:hover{background:var(--green-mid);transform:translateY(-2px);}
+.form-success{display:none;text-align:center;padding:1rem;background:#e8f5ec;border-radius:10px;color:var(--green);font-size:.88rem;margin-top:1rem;}
+
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:500;width:54px;height:54px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:transform .2s;}
+.wa-float:hover{transform:scale(1.1);}
+.wa-float svg{width:28px;height:28px;fill:#fff;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* ══════════════════════════
+   RESPONSIVE
+══════════════════════════ */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;padding:90px 6% 50px;min-height:auto;}
+  .hero-img-wrap{display:none;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);padding:2.5rem 6%;}
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .services-full-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:repeat(2,1fr);}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .contact-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .about-stats{grid-template-columns:repeat(3,1fr);}
+  .review-card{flex:0 0 calc(50% - .75rem);}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-phone{display:none;}
+  .services-grid{grid-template-columns:1fr;}
+  .services-full-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .hero-btns{flex-direction:column;align-items:flex-start;}
+  .footer-grid{grid-template-columns:1fr;}
+  .about-stats{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid{grid-template-columns:1fr;}
+  .review-card{flex:0 0 85vw;}
+  .hero{padding:90px 5% 40px;}
+  .services-section,.testimonials-section,.services-full-grid,.gallery-grid,.contact-grid,.about-grid,.about-stats{padding-left:5%;padding-right:5%;}
+  .cta-section,.stats-bar{padding-left:5%;padding-right:5%;}
+  footer{padding-left:5%;padding-right:5%;}
+}
+@media(max-width:480px){
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+  .about-stats{grid-template-columns:1fr 1fr;}
+  .hero-meta{flex-direction:column;gap:1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919304925047" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.508 5.826L.057 23.997 6.35 22.56A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 01-4.997-1.371l-.358-.213-3.714.975 1-3.619-.233-.372A9.78 9.78 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="showPage('home')">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="nav-logo-text">
+        <strong>Pankaj Clinic</strong>
+        <span>Homeopathy Center</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+      <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+      <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+      <li><a onclick="showPage('gallery')" id="nav-gallery">Gallery</a></li>
+      <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="tel:09304925047" class="nav-phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      </a>
+      <button class="btn-nav" onclick="showPage('contact')">Book Appointment</button>
+      <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a onclick="showPage('home');closeMobileNav()">Home</a>
+  <a onclick="showPage('services');closeMobileNav()">Services</a>
+  <a onclick="showPage('about');closeMobileNav()">About</a>
+  <a onclick="showPage('gallery');closeMobileNav()">Gallery</a>
+  <a onclick="showPage('contact');closeMobileNav()">Contact</a>
+  <button class="btn-primary" onclick="showPage('contact');closeMobileNav()" style="width:fit-content;margin-top:.5rem;">Book Appointment</button>
+</div>
+
+<!-- ══ HOME PAGE ══ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Trusted for 45+ Years</div>
+      <h1 class="hero-title">
+        Natural Healing<br>
+        <span class="gradient-text">Homeopathy</span> <span class="olive-text">Care</span>
+      </h1>
+      <p class="hero-desc">Experience holistic homeopathic treatment with Dr. Pankaj. Specializing in PCOS, mental health, and chronic conditions with personalized care.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('contact')">
+          Book Appointment
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <a href="tel:09304925047" class="btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          Call Now
+        </a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div><strong>Mon – Sat</strong><span>10:30 AM – 8:00 PM</span></div>
+        </div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><strong>KDA Market</strong><span>Kanpur, UP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE — woman in green dress style -->
+    <div class="hero-img-wrap">
+      <div class="hero-img">
+        <div class="hero-img-photo">
+          <!-- Trees background SVG -->
+          <svg style="position:absolute;right:0;top:0;height:100%;opacity:.35;" viewBox="0 0 200 500" preserveAspectRatio="xMaxYMax meet">
+            <ellipse cx="160" cy="120" rx="40" ry="80" fill="#3a7a4a"/>
+            <rect x="155" y="180" width="10" height="200" fill="#2d5a2d"/>
+            <ellipse cx="120" cy="160" rx="30" ry="60" fill="#4a8a5a"/>
+            <rect x="116" y="210" width="8" height="180" fill="#3a6a3a"/>
+          </svg>
+          <!-- Person silhouette -->
+          <div class="hero-figure">
+            <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shadow -->
+              <ellipse cx="110" cy="415" rx="60" ry="8" fill="rgba(0,0,0,.15)"/>
+              <!-- Legs -->
+              <rect x="88" y="310" width="22" height="105" rx="11" fill="#1a3a2a"/>
+              <rect x="112" y="310" width="22" height="105" rx="11" fill="#1a3a2a"/>
+              <!-- Dress/body -->
+              <path d="M68 145 Q110 132 152 145 L165 315 Q110 328 55 315 Z" fill="#2d7a3a"/>
+              <!-- Green texture on dress -->
+              <path d="M75 170 Q110 160 145 170 L150 200 Q110 210 70 200Z" fill="rgba(255,255,255,.08)"/>
+              <!-- Arms -->
+              <path d="M70 152 Q45 185 50 225" stroke="#e8c4a0" stroke-width="20" stroke-linecap="round" fill="none"/>
+              <path d="M150 152 Q175 178 172 215" stroke="#e8c4a0" stroke-width="20" stroke-linecap="round" fill="none"/>
+              <!-- Hands -->
+              <ellipse cx="50" cy="230" rx="14" ry="11" fill="#e8c4a0"/>
+              <ellipse cx="172" cy="220" rx="14" ry="11" fill="#e8c4a0"/>
+              <!-- Neck -->
+              <rect x="101" y="100" width="18" height="28" rx="9" fill="#e8c4a0"/>
+              <!-- Head -->
+              <ellipse cx="110" cy="82" rx="30" ry="34" fill="#e8c4a0"/>
+              <!-- Hair -->
+              <ellipse cx="110" cy="62" rx="31" ry="22" fill="#1a0a00"/>
+              <ellipse cx="80" cy="80" rx="12" ry="28" fill="#1a0a00"/>
+              <path d="M138 60 Q148 80 142 110" stroke="#1a0a00" stroke-width="14" fill="none" stroke-linecap="round"/>
+              <!-- Watch on right wrist -->
+              <rect x="164" y="212" width="16" height="10" rx="4" fill="#b8860b" opacity=".9"/>
+            </svg>
+          </div>
+          <!-- Floating badge bottom left -->
+          <div class="hero-badge-float">
+            <div class="hero-badge-float-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div><strong>5.0 Rating</strong><span>Verified Clinic</span></div>
+          </div>
+          <!-- Floating badge top right -->
+          <div class="hero-badge-float2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <div><strong>45+ Years</strong><span>Of Experience</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="stat-num">45+</div><div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="stat-num">5.0</div><div class="stat-label">Rating</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="stat-num">10k+</div><div class="stat-label">Patients Treated</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="stat-num">100%</div><div class="stat-label">Natural Treatment</div>
+    </div>
+  </div>
+
+  <!-- SERVICES (HOME) -->
+  <section class="services-section">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Our Services</p>
+      <h2 class="section-title">Specialized <span class="gradient-text">Homeopathic</span> <span class="olive-text">Care</span></h2>
+      <p class="section-desc">Comprehensive treatment for various health conditions with natural homeopathic remedies</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card featured" onclick="showPage('services')">
+        <div class="svc-icon icon-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div class="svc-name">PCOS Treatment</div>
+        <p class="svc-desc">Specialized homeopathic treatment for Polycystic Ovarian Syndrome with proven results.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="svc-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="svc-name">Depression Counselling</div>
+        <p class="svc-desc">Professional counselling services for depression and mental health issues.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="svc-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 010 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></div>
+        <div class="svc-name">Asthma Management</div>
+        <p class="svc-desc">Natural homeopathic approach to manage and control asthma symptoms.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="svc-icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="svc-name">Blood Pressure</div>
+        <p class="svc-desc">Holistic treatment for maintaining healthy blood pressure levels.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="svc-icon icon-indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+        <div class="svc-name">Sleep Problems</div>
+        <p class="svc-desc">Effective homeopathic remedies for insomnia and sleep disorders.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="svc-icon icon-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="svc-name">Subrose Therapy</div>
+        <p class="svc-desc">Specialized therapeutic treatment for various chronic conditions.</p>
+      </div>
+    </div>
+    <div class="view-all-center reveal">
+      <button class="btn-outline" onclick="showPage('services')">
+        View All Services
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Patient Stories</p>
+      <h2 class="section-title">What Our <span class="gradient-text">Patients Say</span></h2>
+    </div>
+    <div class="reviews-wrap reveal">
+      <div class="reviews-track" id="reviewsTrack">
+        <div class="review-card">
+          <div><div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="review-text">"Pankaj Clinic is a great place for health care. The doctors and physiotherapists are very nice and helpful. I love that they offer subsidies to help patients."</p></div>
+          <div><div class="reviewer-name">Alok Thwari</div><div class="reviewer-type">General Consultation</div></div>
+        </div>
+        <div class="review-card">
+          <div><div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="review-text">"Excellent treatment for PCOS. Dr. Pankaj's homeopathic approach worked wonders for me. Highly recommended by everyone in my family!"</p></div>
+          <div><div class="reviewer-name">Priya Sharma</div><div class="reviewer-type">PCOS Treatment</div></div>
+        </div>
+        <div class="review-card">
+          <div><div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="review-text">"My asthma has improved significantly after treatment here. Very professional and caring staff. Truly grateful to Dr. Pankaj."</p></div>
+          <div><div class="reviewer-name">Rajesh Kumar</div><div class="reviewer-type">Asthma Management</div></div>
+        </div>
+        <div class="review-card">
+          <div><div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="review-text">"Best homeopathic clinic in Kanpur. Blood pressure treatment has shown great results. Very affordable and natural."</p></div>
+          <div><div class="reviewer-name">Suresh Verma</div><div class="reviewer-type">Blood Pressure</div></div>
+        </div>
+        <div class="review-card">
+          <div><div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="review-text">"Sleep problems completely gone after 3 months. Very effective and affordable natural medicine."</p></div>
+          <div><div class="reviewer-name">Neha Gupta</div><div class="reviewer-type">Sleep Problems</div></div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="scrollCarousel(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <div class="dots" id="carouselDots">
+          <button class="dot active" onclick="goToSlide(0)"></button>
+          <button class="dot" onclick="goToSlide(1)"></button>
+          <button class="dot" onclick="goToSlide(2)"></button>
+        </div>
+        <button class="carousel-btn" onclick="scrollCarousel(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Start Your Healing Journey?</h2>
+    <p class="cta-desc">Book your consultation today and experience the power of natural homeopathic treatment</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('contact')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Appointment Now
+      </button>
+      <button class="btn-outline-white" onclick="showPage('contact')">Contact Us</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <strong>Pankaj Clinic</strong>
+        <p>Providing quality homeopathic treatment for over 45 years. Your health is our priority.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('services')">Services</a></li>
+          <li><a onclick="showPage('about')">About Doctor</a></li>
+          <li><a onclick="showPage('contact')">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span>09304925047</span></div>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@pankajclinic.com</span></div>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>KDA Market, Kanpur, UP 208001</span></div>
+      </div>
+      <div class="footer-col">
+        <h4>Clinic Hours</h4>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:.5rem;">Monday – Saturday</p>
+        <p style="font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.8rem;">10:30 AM – 8:00 PM</p>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.6);">Sunday: Closed</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Pankaj Clinic. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ══ SERVICES PAGE ══ -->
+<div class="page" id="page-services">
+  <div class="page-hero">
+    <p class="section-eyebrow">Our Services</p>
+    <h1 class="page-hero-title">Specialized <span class="gradient-text">Homeopathic</span> <span class="olive-text">Care</span></h1>
+    <p class="page-hero-desc">Comprehensive natural treatment solutions for various health conditions with personalized care and proven results</p>
+  </div>
+  <div class="services-full-grid">
+    <div class="svc-full-card reveal">
+      <div class="svc-icon icon-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <div class="svc-full-name">PCOS Treatment</div>
+      <p class="svc-full-desc">Specialized homeopathic treatment for Polycystic Ovarian Syndrome. Our constitutional remedies help regulate hormones naturally and restore menstrual balance.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Hormone regulation</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Menstrual cycle management</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Zero side effects</div>
+      </div>
+    </div>
+    <div class="svc-full-card reveal">
+      <div class="svc-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div class="svc-full-name">Depression Counselling</div>
+      <p class="svc-full-desc">Professional counselling services combined with homeopathic remedies for depression, anxiety and mental health issues.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Anxiety & stress relief</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Mood stabilization</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Non-addictive treatment</div>
+      </div>
+    </div>
+    <div class="svc-full-card reveal">
+      <div class="svc-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 010 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/></svg></div>
+      <div class="svc-full-name">Asthma Management</div>
+      <p class="svc-full-desc">Natural homeopathic approach to manage and control asthma symptoms, reducing frequency and severity of attacks.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Breathing improvement</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Allergy management</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Long-term relief</div>
+      </div>
+    </div>
+    <div class="svc-full-card reveal">
+      <div class="svc-icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="svc-full-name">Blood Pressure</div>
+      <p class="svc-full-desc">Holistic treatment for maintaining healthy blood pressure levels without dependency on allopathic medicines.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>BP stabilization</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Lifestyle guidance</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Safe for all ages</div>
+      </div>
+    </div>
+    <div class="svc-full-card reveal">
+      <div class="svc-icon icon-indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+      <div class="svc-full-name">Sleep Problems</div>
+      <p class="svc-full-desc">Effective homeopathic remedies for insomnia and sleep disorders. Get deep, restful sleep naturally.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Insomnia treatment</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Sleep cycle regulation</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No sleeping pills</div>
+      </div>
+    </div>
+    <div class="svc-full-card reveal">
+      <div class="svc-icon icon-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="svc-full-name">Subrose Therapy</div>
+      <p class="svc-full-desc">Specialized therapeutic treatment for various chronic conditions including skin disorders and autoimmune issues.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Skin disorders</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Immune strengthening</div>
+        <div class="svc-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Chronic condition care</div>
+      </div>
+    </div>
+  </div>
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Start Your Healing Journey?</h2>
+    <p class="cta-desc">Book your consultation today and experience the power of natural homeopathic treatment</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('contact')">Book Appointment Now</button>
+      <button class="btn-outline-white" onclick="showPage('contact')">Contact Us</button>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><strong>Pankaj Clinic</strong><p>Providing quality homeopathic treatment for over 45 years.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Contact Info</h4><div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span>09304925047</span></div><div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>KDA Market, Kanpur UP</span></div></div>
+      <div class="footer-col"><h4>Clinic Hours</h4><p style="font-size:.82rem;color:rgba(255,255,255,.6);">Mon–Sat: 10:30 AM – 8:00 PM</p><p style="font-size:.82rem;color:rgba(255,255,255,.6);margin-top:.4rem;">Sunday: Closed</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Pankaj Clinic. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ══ ABOUT PAGE ══ -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <p class="section-eyebrow">About Us</p>
+    <h1 class="page-hero-title">Trusted <span class="gradient-text">Homeopathic</span> <span class="olive-text">Doctors</span></h1>
+    <p class="page-hero-desc">Dedicated to providing the highest quality natural healthcare with compassion and expertise for over 45 years.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    <div class="about-content reveal">
+      <p class="section-eyebrow">Our Story</p>
+      <h2 class="about-title">46 Years of <span class="gradient-text">Healing Naturally</span></h2>
+      <p class="about-desc">Pankaj Clinic has been a cornerstone of homeopathic medicine in Kanpur since 1979. With a patient-first philosophy, the clinic brings together classical homeopathy and modern diagnostic understanding to deliver truly personalized care.</p>
+      <p class="about-desc">Registered with the Uttar Pradesh Board of Homoeopathic Medicine and a proud member of the Academy of Classical Homoeopathy, Mumbai — the clinic is committed to rigorous, authentic homoeopathic practice.</p>
+      <div class="qual-list">
+        <div class="qual-item">
+          <div class="qual-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="qual-content"><strong>BHMS – Bachelor of Homoeopathic Medicine & Surgery</strong><span>Dr. Hari Singh Gour University, Sagar MP · 2015</span></div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="qual-content"><strong>BSc – Food Science & Nutrition</strong><span>Kanpur University · 2015</span></div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="qual-content"><strong>Member – Academy of Classical Homoeopathy, Mumbai</strong><span>Membership No. 500</span></div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="qual-content"><strong>Registration No. HD35512</strong><span>UP Board of Homoeopathic Medicine · 2015</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="about-stats">
+    <div class="about-stat reveal">
+      <div class="about-stat-num gradient-text">46+</div>
+      <div class="about-stat-label">Years in Healthcare</div>
+    </div>
+    <div class="about-stat reveal">
+      <div class="about-stat-num gradient-text">10,000+</div>
+      <div class="about-stat-label">Patients Treated</div>
+    </div>
+    <div class="about-stat reveal">
+      <div class="about-stat-num gradient-text">5.0</div>
+      <div class="about-stat-label">Average Rating</div>
+    </div>
+  </div>
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Start Your Healing Journey?</h2>
+    <p class="cta-desc">Book your consultation today</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('contact')">Book Appointment Now</button>
+      <button class="btn-outline-white" onclick="showPage('contact')">Contact Us</button>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><strong>Pankaj Clinic</strong><p>Providing quality homeopathic treatment for over 45 years.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Contact Info</h4><div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span>09304925047</span></div><div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>KDA Market, Kanpur UP</span></div></div>
+      <div class="footer-col"><h4>Clinic Hours</h4><p style="font-size:.82rem;color:rgba(255,255,255,.6);">Mon–Sat: 10:30 AM – 8:00 PM</p><p style="font-size:.82rem;color:rgba(255,255,255,.6);margin-top:.4rem;">Sunday: Closed</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Pankaj Clinic. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ══ GALLERY PAGE ══ -->
+<div class="page" id="page-gallery">
+  <div class="page-hero">
+    <p class="section-eyebrow">Our Gallery</p>
+    <h1 class="page-hero-title">Inside <span class="gradient-text">Pankaj Clinic</span></h1>
+    <p class="page-hero-desc">A glimpse into our welcoming clinic environment and the care we provide every day.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><div class="gallery-label">Clinic Reception</div></div>
+    <div class="gallery-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="gallery-label">Consultation Room</div></div>
+    <div class="gallery-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><div class="gallery-label">Patient Care</div></div>
+    <div class="gallery-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8h1a4 4 0 010 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/></svg><div class="gallery-label">Medicine Dispensary</div></div>
+    <div class="gallery-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div class="gallery-label">Treatment Area</div></div>
+    <div class="gallery-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><div class="gallery-label">Happy Patients</div></div>
+  </div>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><strong>Pankaj Clinic</strong><p>Providing quality homeopathic treatment for over 45 years.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Contact Info</h4><div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span>09304925047</span></div></div>
+      <div class="footer-col"><h4>Clinic Hours</h4><p style="font-size:.82rem;color:rgba(255,255,255,.6);">Mon–Sat: 10:30 AM – 8:00 PM</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Pankaj Clinic. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ══ CONTACT PAGE ══ -->
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <p class="section-eyebrow">Get In Touch</p>
+    <h1 class="page-hero-title">Book Your <span class="gradient-text">Appointment</span></h1>
+    <p class="page-hero-desc">Reach out to us and our team will get back to you to confirm your consultation slot.</p>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;margin-bottom:1.5rem;">Contact Information</h3>
+      <div class="contact-card">
+        <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div><div class="contact-card-label">Phone</div><div class="contact-card-value"><a href="tel:09304925047">09304925047</a></div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="contact-card-label">Email</div><div class="contact-card-value"><a href="mailto:info@pankajclinic.com">info@pankajclinic.com</a></div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="contact-card-label">Address</div><div class="contact-card-value">Shop No. 25/5, KDA Market<br>Opp. Laxman Park, Canal Road<br>Kanpur – 208001, UP</div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><div class="contact-card-label">Clinic Hours</div><div class="contact-card-value">Mon–Sat: 10:30 AM – 8:00 PM<br>Sunday: Closed</div></div>
+      </div>
+      <div class="map-placeholder">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        KDA Market, Canal Road, Kanpur
+      </div>
+    </div>
+    <div>
+      <div class="form-card">
+        <div class="form-title">Book Appointment</div>
+        <div class="form-subtitle">Fill in your details and we'll confirm your slot shortly.</div>
+        <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" placeholder="Your full name" id="f-name"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Phone *</label><input class="form-input" type="tel" placeholder="Mobile number" id="f-phone"></div>
+          <div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" placeholder="Your age" id="f-age"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Preferred Date</label><input class="form-input" type="date" id="f-date"></div>
+        <div class="form-group"><label class="form-label">Reason for Visit</label><input class="form-input" type="text" placeholder="e.g. PCOS, Sleep issue, General checkup" id="f-reason"></div>
+        <button class="form-submit" onclick="submitForm()">Confirm Appointment →</button>
+        <div class="form-success" id="form-success">✓ Request sent! We'll call you to confirm your appointment.</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><strong>Pankaj Clinic</strong><p>Providing quality homeopathic treatment for over 45 years.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Contact Info</h4><div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span>09304925047</span></div></div>
+      <div class="footer-col"><h4>Clinic Hours</h4><p style="font-size:.82rem;color:rgba(255,255,255,.6);">Mon–Sat: 10:30 AM – 8:00 PM</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Pankaj Clinic. All rights reserved.</div>
+  </footer>
+</div>
+
+<script>
+// ── PAGE NAVIGATION ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + name);
+  if(navEl) navEl.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  // re-trigger reveals
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if(rect.top < window.innerHeight * 0.9) el.classList.add('visible');
+    });
+  }, 100);
+}
+
+// ── MOBILE NAV ──
+function toggleMobileNav() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+}
+
+// ── SCROLL REVEAL ──
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+function attachReveals() {
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+attachReveals();
+
+// ── NAV SHADOW ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,.08)' : 'none';
+  // reveal on scroll
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight * 0.9) el.classList.add('visible');
+  });
+});
+
+// ── CAROUSEL ──
+let currentSlide = 0;
+const totalDots = 3;
+
+function scrollCarousel(dir) {
+  const track = document.getElementById('reviewsTrack');
+  if(!track) return;
+  const card = track.querySelector('.review-card');
+  if(!card) return;
+  const cardW = card.offsetWidth + 24;
+  const newSlide = Math.max(0, Math.min(totalDots - 1, currentSlide + dir));
+  track.scrollTo({left: newSlide * cardW, behavior:'smooth'});
+  updateDots(newSlide);
+}
+
+function goToSlide(idx) {
+  const track = document.getElementById('reviewsTrack');
+  if(!track) return;
+  const card = track.querySelector('.review-card');
+  if(!card) return;
+  const cardW = card.offsetWidth + 24;
+  track.scrollTo({left: idx * cardW, behavior:'smooth'});
+  updateDots(idx);
+}
+
+function updateDots(idx) {
+  currentSlide = idx;
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === idx));
+}
+
+// Auto-scroll
+setInterval(() => {
+  const next = (currentSlide + 1) % totalDots;
+  goToSlide(next);
+}, 4000);
+
+// ── FORM SUBMIT ──
+function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  if(!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  document.getElementById('form-success').style.display = 'block';
+  document.querySelector('.form-submit').style.display = 'none';
+  const date = document.getElementById('f-date').value || 'Earliest available';
+  const reason = document.getElementById('f-reason').value || 'General consultation';
+  setTimeout(() => {
+    window.open('https://wa.me/919304925047?text=Hello%20Pankaj%20Clinic!%20I%20want%20to%20book%20an%20appointment.%0AName%3A%20' + encodeURIComponent(name) + '%0APhone%3A%20' + phone + '%0ADate%3A%20' + encodeURIComponent(date) + '%0AReason%3A%20' + encodeURIComponent(reason), '_blank');
+  }, 600);
+}
+</script>
+</body>
+</html>
